@@ -2,4 +2,8 @@
 <paths>
     <external-path name="my_images"
         path="Android/data/com.example.downloadvideoandplay/files/Download" />
+
+    <paths >
+        <external-path name="external_files" path="."/>
+    </paths>
 </paths>

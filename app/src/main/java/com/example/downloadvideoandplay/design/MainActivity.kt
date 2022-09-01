@@ -1,19 +1,25 @@
 package com.example.downloadvideoandplay.design
 
+import android.Manifest
 import android.app.DownloadManager
 import android.app.DownloadManager.*
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.content.pm.PackageManager
 import android.database.Cursor
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.downloadvideoandplay.LocalVideoListAdapter
@@ -48,14 +54,12 @@ class MainActivity : BaseActivity() {
         recyclerOfVideoList = findViewById(R.id.recyclerView)
         recyclerOfVideoList.layoutManager = LinearLayoutManager(this)
 
-        btnPlayVideo.visibility = View.GONE
         btnDownloadVideo.setOnClickListener {
             downloadVideo(urlVideo)
         }
         btnPlayVideo.setOnClickListener {
-//            getDirectory("")
+            startActivity(Intent(this, DownloadServiceActivity::class.java))
         }
-//        checkDownloadFileStatus()
     }
 
     private fun getDirectory() {
@@ -66,6 +70,7 @@ class MainActivity : BaseActivity() {
         getFileListDownloadDirectory(fullPath)
         Log.e("fullPath", "" + gpath + "\n" + fullPath)
     }
+
 
     private fun getFileListDownloadDirectory(root: File) {
         val fileList: ArrayList<File> = ArrayList()
@@ -110,13 +115,13 @@ class MainActivity : BaseActivity() {
                     if (downloadCursor.moveToFirst()) {
                         val columnIndex: Int = downloadCursor.getColumnIndex(COLUMN_STATUS)
 
-                        val nameInt = downloadCursor.getColumnIndex(COLUMN_LOCAL_URI)
-                        val downloadFileLocalUri: String = downloadCursor.getString(nameInt)
-                        val mFile = File(Uri.parse(downloadFileLocalUri).path)
-                        val downloadFilePath = mFile.absolutePath
+//                        val nameInt = downloadCursor.getColumnIndex(COLUMN_LOCAL_URI)
+//                        val downloadFileLocalUri: String = downloadCursor.getString(nameInt)
+//                        val mFile = File(Uri.parse(downloadFileLocalUri).path.toString())
+//                        val downloadFilePath = mFile.absolutePath
 
-                        Log.i(TAG, "checkDownloadFileStatus Name: $downloadFilePath")
-                        statusName.add(downloadFilePath)
+//                        Log.i(TAG, "checkDownloadFileStatus Name: $downloadFilePath")
+//                        statusName.add(downloadFilePath)
 
                         when (downloadCursor.getInt(columnIndex)) {
                             STATUS_FAILED -> {
@@ -185,10 +190,11 @@ class MainActivity : BaseActivity() {
             .setTitle(fileName)
             .setDescription("Android Data download using DownloadManager.")
             .setNotificationVisibility(Request.VISIBILITY_VISIBLE)
+            .setVisibleInDownloadsUi(false) //not show user download item
             .setAllowedNetworkTypes(Request.NETWORK_WIFI or Request.NETWORK_MOBILE)
         downloadVideo.setDestinationInExternalFilesDir(
             this,
-            Environment.DIRECTORY_DOWNLOADS, "/Demo/paras.mp4"
+            Environment.DIRECTORY_DOWNLOADS, "Demo/paras.mp4"
         )
 
         downloadVideo.setNotificationVisibility(Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
