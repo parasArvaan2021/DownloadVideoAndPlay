@@ -9,6 +9,7 @@ import com.example.downloadvideoandplay.R
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.SimpleExoPlayer
+import com.google.android.exoplayer2.ui.PlayerView
 import com.google.android.exoplayer2.ui.StyledPlayerView
 
 
@@ -17,7 +18,7 @@ import com.google.android.exoplayer2.ui.StyledPlayerView
 
 class VideoPlayerActivity : AppCompatActivity() {
     private lateinit var exoplayer:Player
-    private lateinit var playerView:StyledPlayerView
+    private lateinit var playerView:PlayerView
     private lateinit var url:String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

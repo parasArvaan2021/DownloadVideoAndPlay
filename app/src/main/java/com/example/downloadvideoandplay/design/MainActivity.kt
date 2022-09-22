@@ -36,8 +36,10 @@ class MainActivity : BaseActivity() {
     var fileName: String? = null
 
     //    var urlVideo1 = "https://cdn.videvo.net/videvo_files/video/premium/video0287/large_watermarked/_Awards1_preview.mp4"
+//    private var urlVideo =
+//        "http://clips.vorwaerts-gmbh.de/VfE_html5.mp4"
     private var urlVideo =
-        "https://cdn.videvo.net/videvo_files/video/free/2017-12/large_watermarked/171124_B1_HD_001_preview.mp4"
+        "https://embed-ssl.wistia.com/deliveries/e185efc4a75765a4e28c51dccdfbb805.bin"
     private lateinit var recyclerOfVideoList: RecyclerView
 
     private var downloadFileId: Long = 0

@@ -3,8 +3,6 @@ package com.example.downloadvideoandplay.design
 
 import android.app.DownloadManager
 import android.app.Service
-import android.content.Context
-import android.content.ContextWrapper
 import android.content.Intent
 import android.database.Cursor
 import android.net.Uri
